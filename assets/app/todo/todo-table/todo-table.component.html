@@ -1,0 +1,13 @@
+<div class="col-md-4" *ngFor="let todoTable of todoTables">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{todoTable.tableName}}</h3>
+    </div>
+    <div class="panel-body">
+
+      <add-todo [todoTable]="todoTable"></add-todo>
+      <item></item>
+    </div>
+  </div>
+
+</div>
