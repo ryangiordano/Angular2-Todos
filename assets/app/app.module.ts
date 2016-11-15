@@ -8,7 +8,7 @@ import { RouterConfig} from './router.config';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TodoComponent } from './todo/todo.component';
-import { AddTodoComponent } from './todo/add/add-todo.component';
+import { AddTodoComponent } from './todo/add-todo/add-todo.component';
 import { ItemComponent } from './todo/item/item.component';
 import { TodoTableComponent } from './todo/todo-table/todo-table.component';
 import { NavComponent } from './nav/nav.component';
@@ -16,6 +16,8 @@ import { NavComponent } from './nav/nav.component';
 import { AuthService} from './shared/services/auth.service';
 import { TodoService} from './shared/services/todo.service';
 import { TodoTableService} from './shared/services/todo-table.service';
+
+import { TodoPipe} from './shared/pipes/todo.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { TodoTableService} from './shared/services/todo-table.service';
     AddTodoComponent,
     ItemComponent,
     TodoTableComponent,
-    NavComponent
+    NavComponent,
+    TodoPipe
   ],
   imports: [
     BrowserModule,

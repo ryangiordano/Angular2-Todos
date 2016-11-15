@@ -32,7 +32,10 @@ export class AddTodoComponent implements OnInit{
     this._todoService.addTodo(todo).subscribe(
       data=>{
         this.form.reset();
-        console.log(data)
+        this.form = this.formBuilder.group({
+          'title':['', Validators.required],
+          'todoTable':[this.todoTable._id, Validators.required]
+        })
       },
       error=>{
         console.error(error)

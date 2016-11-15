@@ -1,0 +1,6 @@
+<fieldset class="form-group">
+  <form class="form-group" [formGroup]="form" (keyup.enter)="onSubmit()" novalidate>
+    <input type="text" class="form-control" name="title" formControlName="title" [(ngModel)]="addTodo" value="" placeholder="Add Todo" >
+  </form>
+
+</fieldset>

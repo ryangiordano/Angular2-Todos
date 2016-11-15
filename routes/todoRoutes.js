@@ -68,6 +68,38 @@ router.post('/', function(req,res,next){
     })
   })
 });
+
+//edit the concluded property
+router.patch('/', function(req, res, next){
+  Todo.findById(req.body._id, function(err, todo){
+    if(err){
+      return res.status(500).json({
+        title: "An error occured",
+        error: err
+      });
+    }
+    if(!todo){
+      return res.status(500).json({
+        title: "No Todo Found",
+        error: {message: "Todo not found"}
+      });
+    }
+    todo.concluded = req.body.concluded;
+    todo.title = req.body.title;
+    todo.save(function(err,results){
+      if(err){
+        return res.status(500).json({
+          title: "An error occured",
+          message: err
+        })
+      }
+      res.status(200).json({
+        message: "Updated message",
+        obj: results
+      });
+    })
+  })
+});
 router.post('/tableTodo', function(res,req,next){
   //use the todo table's id to get the todo
 
