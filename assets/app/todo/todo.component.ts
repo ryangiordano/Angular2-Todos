@@ -16,16 +16,16 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class TodoComponent implements OnInit {
     todoTables: TodoTable[] = [];
+    todoTablesSubscription:Subscription;
 
     todos: Todo[] = [];
-    subscription: Subscription;
+    todosSubscription: Subscription;
 
     constructor(private _todoTableService: TodoTableService, private _todoService: TodoService) { }
     ngOnInit() {
         this._todoTableService.getTodoTables().subscribe(
             data => {
                 console.log(data);
-                this.todoTables = data;
             },
             error => {
                 console.error(error);
@@ -33,6 +33,14 @@ export class TodoComponent implements OnInit {
             () => {
 
                 console.log("observable completed")
+                this.todoTablesSubscription = this._todoTableService.todoTables$.subscribe(
+                  todoTables=>{
+                    this.todoTables = todoTables
+                  },
+                  error=>{
+                    console.error(error)
+                  }
+                )
             }
         )
 
@@ -45,7 +53,7 @@ export class TodoComponent implements OnInit {
             },
             () => {
                 //when the observable completes, set up a subscription to the BehaviorSubject in _todoService. This will make sure that the list of todos trickling down will always be up to date
-                this.subscription = this._todoService.todos$.subscribe(
+                this.todosSubscription = this._todoService.todos$.subscribe(
                     todos => {
                         this.todos = todos
                         console.log(this.todos)

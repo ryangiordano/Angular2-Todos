@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TodoComponent } from './todo/todo.component';
 import { AddTodoComponent } from './todo/add-todo/add-todo.component';
+import { AddTodoTableComponent } from './todo/add-todo-table/add-todo-table.component';
 import { ItemComponent } from './todo/item/item.component';
 import { TodoTableComponent } from './todo/todo-table/todo-table.component';
 import { NavComponent } from './nav/nav.component';
@@ -28,7 +29,8 @@ import { TodoPipe} from './shared/pipes/todo.pipe';
     ItemComponent,
     TodoTableComponent,
     NavComponent,
-    TodoPipe
+    TodoPipe,
+    AddTodoTableComponent
   ],
   imports: [
     BrowserModule,

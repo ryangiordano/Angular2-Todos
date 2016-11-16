@@ -1,0 +1,10 @@
+
+<div class="panel">
+  <div class="panel-body">
+    <fieldset class="form-group">
+      <form class="form-group" [formGroup]="form" (keyup.enter)="onSubmit()" novalidate>
+        <input type="text" class="form-control" name="tableName" formControlName="tableName" value="" placeholder="Add a Todo Table" >
+      </form>
+    </fieldset>
+  </div>
+</div>

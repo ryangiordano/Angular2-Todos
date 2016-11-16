@@ -56,10 +56,10 @@ db.once('open', function(){
   console.log("We're connected to Mongo DB~");
 });
 
-app.use('/', appRoutes);
+app.use('/api-todotables', todoTableRoutes);
 app.use('/api-users', userRoutes);
 app.use('/api-todos', todoRoutes);
-app.use('/api-todoTables', todoTableRoutes);
+app.use('/', appRoutes);
 
 
 // catch 404 and forward to error handler

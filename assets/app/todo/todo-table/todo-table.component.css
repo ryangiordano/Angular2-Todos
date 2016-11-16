@@ -1,0 +1,29 @@
+.panel-heading{
+  position:relative;
+}
+.panel-heading:hover .destroy {
+    display: block;
+    color:#bfbfbf
+}
+.panel-heading .destroy:hover {
+    color: #ffffff;
+}
+.panel-heading .destroy {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: -10px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+    font-size: 30px;
+    color: #cc9a9a;
+    margin-bottom: 6px;
+    transition: color 0.2s ease-out;
+    cursor:pointer;
+}
+
+.panel-heading .destroy:after {
+    content: '×';
+}

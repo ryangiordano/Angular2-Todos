@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, state, style, transition, trigger, animate, keyframes, group} from '@angular/core';
 import { Todo } from '../../shared/models/todo';
 import { TodoTable } from '../../shared/models/todo-table';
 import { TodoPipe } from '../../shared/pipes/todo.pipe';
@@ -7,7 +7,27 @@ import { TodoService} from '../../shared/services/todo.service';
 @Component({
     selector: 'item',
     templateUrl: '/item.component.html',
-    styleUrls: ['/item.component.css']
+    styleUrls: ['/item.component.css'],
+    animations:[
+      trigger('todoItem',[
+        state('in', style({
+          opacity:1,
+        })),
+        transition('void=>*', [
+          style({
+            opacity:0
+          }),
+          animate(300)
+        ]),
+        transition('*=>void', [
+          style({
+            opacity:0
+          }),
+          animate(300)
+        ])
+      ]),
+
+    ]
 })
 
 export class ItemComponent implements OnInit {
