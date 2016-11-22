@@ -4,12 +4,10 @@ var TodoTable = require('./todo-table');
 
 var schema = new Schema({
   title:{
-    type: String,
-    required:true
+    type: String
   },
   todoTable:{
-    type: String,
-    required:true
+    type: String
   },
   concluded:{
     type: Boolean
@@ -20,10 +18,12 @@ var schema = new Schema({
 });
 
 schema.post('save', function (todo) {
+  console.log(TodoTable);
     TodoTable.findById(todo.todoTable, function (err, todoTable) {
         todoTable.todos.push(todo);
         todoTable.save();
     });
 });
 
-module.exports = mongoose.model('todo', schema);
+var Todo = mongoose.model('Todo', schema);
+module.exports = Todo;
