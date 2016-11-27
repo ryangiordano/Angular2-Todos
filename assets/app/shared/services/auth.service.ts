@@ -8,39 +8,46 @@ import { User } from '../models/user';
 
 @Injectable()
 export class AuthService {
-user:User= null;
-userSource = new BehaviorSubject<User>(null);
+    private user: User = new User();
+    private userSource = new BehaviorSubject<User>(null);
 
-  constructor(private _http:Http) { }
+    user$ = this.userSource.asObservable();
+    constructor(private _http: Http) { }
 
-  login(user:User):Observable<any>{
-    const body = JSON.stringify(user);
-    const headers = new Headers({'Content-type': 'application/json'});
-    return this._http.post('/users-api/login', body, {headers:headers})
-    .map((response: Response)=>{
-      this.user = response.json()._id;
-      this.userSource.next(response.json().user);
-      return response.json();
-    })
-    .catch(error=>Observable.throw(error.json()));
-  }
+    login(user: User): Observable<any> {
+        const body = JSON.stringify(user);
+        const headers = new Headers({ 'Content-type': 'application/json' });
+        return this._http.post('/api-users/login', body, { headers: headers })
+            .map((response: Response) => {
+                this.user = response.json().user;
+                console.log("From auth service with love")
+                console.log(response.json().user)
+                this.userSource.next(this.user);
+                return response.json();
+            })
+            .catch(error => Observable.throw(error.json()));
+    }
 
-  logout(){
-    return new Observable(observer=>{
-      this.userSource.next(this.user);
-      localStorage.clear();
-        console.log("logged out")
-    });
+    logout():Observable<any> {
+        return new Observable(observer => {
+          observer.next(
+            this.userSource.next(this.user),
+            localStorage.clear()
+          )
+        });
 
-  }
-  registerNewUser(user:User):Observable<any>{
-    const body = JSON.stringify(user);
-    const headers = new Headers({'Content-Type':'application/json'});
-    return this._http.post('/users-api',body,{headers:headers})
-    .map((response:Response)=>response.json())
-    .catch(error=>Observable.throw(error.json()))
-  }
-  isLoggedIn(){
-    return localStorage.getItem('token')!==null;
-  }
+    }
+    registerNewUser(user: User): Observable<any> {
+        const body = JSON.stringify(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        return this._http.post('/api-users', body, { headers: headers })
+            .map((response: Response) => response.json())
+            .catch(error => Observable.throw(error.json()))
+    }
+    isLoggedIn() {
+        return localStorage.getItem('token') !== null;
+    }
+    authenticateUser(userId:string, token:string){
+
+    }
 }

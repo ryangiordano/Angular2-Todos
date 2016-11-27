@@ -13,10 +13,14 @@ import { AddTodoTableComponent } from './todo/add-todo-table/add-todo-table.comp
 import { ItemComponent } from './todo/item/item.component';
 import { TodoTableComponent } from './todo/todo-table/todo-table.component';
 import { NavComponent } from './nav/nav.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ErrorComponent } from './error/error.component';
 
 import { AuthService} from './shared/services/auth.service';
 import { TodoService} from './shared/services/todo.service';
 import { TodoTableService} from './shared/services/todo-table.service';
+import { ErrorService} from './shared/services/error.service';
 
 import { TodoPipe} from './shared/pipes/todo.pipe';
 
@@ -30,7 +34,10 @@ import { TodoPipe} from './shared/pipes/todo.pipe';
     TodoTableComponent,
     NavComponent,
     TodoPipe,
-    AddTodoTableComponent
+    AddTodoTableComponent,
+    RegisterComponent,
+    LoginComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,7 @@ import { TodoPipe} from './shared/pipes/todo.pipe';
     HttpModule,
     RouterModule.forRoot(RouterConfig)
   ],
-  providers: [AuthService, TodoService, TodoTableService],
+  providers: [AuthService, TodoService, TodoTableService, ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,9 +3,9 @@ var router = express.Router();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
-var User = require('../models/user');
-var Todo = require('../models/todo');
-var TodoTable = require('../models/todo-table');
+var User = require('../models/user.model');
+var Todo = require('../models/todo.model');
+var TodoTable = require('../models/todo-table.model');
 
 
 //TODO: get todoTables and place todos inside them in some way.
@@ -50,9 +50,8 @@ router.post('/', function(req,res,next){
       title: req.body.title,
       todoTable:req.body.todoTable,
       concluded: false,
-      user: null
+      user: req.body.user
     });
-    console.log(todo)
     todo.save(function(err, result){
       if(err){
         console.log(err)

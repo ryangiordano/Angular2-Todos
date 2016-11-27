@@ -3,9 +3,9 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 
-var User = require('../models/user');
-var Todo = require('../models/todo');
-var TodoTable = require('../models/todo-table');
+var User = require('../models/user.model');
+var Todo = require('../models/todo.model');
+var TodoTable = require('../models/todo-table.model');
 
 //create a user
 router.post('/', function(req, res, next) {
@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
 });
 
 //signin
-router.post('/signin', function(req, res, next) {
+router.post('/login', function(req, res, next) {
     User.findOne({
         email: req.body.email
     }, function(err, user) {
@@ -64,7 +64,8 @@ router.post('/signin', function(req, res, next) {
         res.status(200).json({
             message: "Successfully logged in",
             token: token,
-            userId: user._id
+            userId: user._id,
+            user: user
         });
 
     });

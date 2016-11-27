@@ -21,4 +21,4 @@ var schema = new Schema({
   todos:[{type: Schema.Types.ObjectId}, {ref:'Todo'}],
 });
 
-module.exports = mongoose.model('user', schema);
+module.exports = mongoose.model('User', schema);

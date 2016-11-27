@@ -5,6 +5,7 @@ import { TodoService} from '../../shared/services/todo.service';
 import { TodoTableService} from '../../shared/services/todo-table.service';
 import { Todo } from '../../shared/models/todo';
 import { TodoTable } from '../../shared/models/todo-table';
+
 @Component({
   selector: 'add-todo-table',
   templateUrl: '/add-todo-table.component.html',
@@ -16,7 +17,7 @@ export class AddTodoTableComponent implements OnInit{
   currentDate = new Date();
 
   form:FormGroup;
-  constructor(private _todoService:TodoService, private formBuilder:FormBuilder, private _todoTableService: TodoTableService){
+  constructor(private _todoService:TodoService,  private formBuilder:FormBuilder, private _todoTableService: TodoTableService){
 
   }
   ngOnInit(){
@@ -29,7 +30,7 @@ export class AddTodoTableComponent implements OnInit{
     if(!this.form.valid){
       return console.log("error")
     }
-    const todoTable = new TodoTable(this.form.value.tableName, this.currentDate)
+    const todoTable = new TodoTable(this.form.value.tableName, this.currentDate, null,localStorage.getItem('userId'))
     this._todoTableService.addTodoTable(todoTable).subscribe(
       data=>{
         this.form.reset();

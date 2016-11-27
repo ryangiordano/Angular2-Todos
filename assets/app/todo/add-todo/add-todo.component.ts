@@ -28,7 +28,7 @@ export class AddTodoComponent implements OnInit{
     if(!this.form.valid){
       return console.log("error")
     }
-    const todo = new Todo(this.form.value.title, this.form.value.todoTable, null, false)
+    const todo = new Todo(this.form.value.title, this.form.value.todoTable, localStorage.getItem('userId'), false)
     this._todoService.addTodo(todo).subscribe(
       data=>{
         this.form.reset();

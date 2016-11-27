@@ -1,8 +1,9 @@
-<div class="row">
+<div class="row" *ngIf="isLoggedIn()">
     <div class="col-md-6 col-md-offset-3">
         <add-todo-table></add-todo-table>
     </div>
 </div>
 <div class="row">
+    <p *ngIf="!isLoggedIn()">Please <a [routerLink]="['/login']">log in</a> to view and add your own todos!</p>
     <todo-table [todoTables]="todoTables" [todos]="todos"></todo-table>
 </div>

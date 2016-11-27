@@ -18,7 +18,8 @@ export class TodoTableService {
     constructor(private _http: Http) { }
 
     getTodoTables(): Observable<any> {
-        return this._http.get('/api-todotables')
+        const token = localStorage.getItem('token') ? '?token='+ localStorage.getItem('token') : '';
+        return this._http.get('/api-todotables'+token)
             .map(response => {
                 const data = response.json().obj;
                 let objs: any[] = [];
@@ -33,9 +34,10 @@ export class TodoTableService {
             .catch(error => Observable.throw(error.json()));
     }
     addTodoTable(todoTable: TodoTable): Observable<any> {
+        const token = localStorage.getItem('token') ? '?token='+ localStorage.getItem('token') : '';
         const body = JSON.stringify(todoTable);
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this._http.post('/api-todotables', body, { headers: headers })
+        return this._http.post('/api-todotables'+token, body, { headers: headers })
             .map((response: Response) => {
                 let addedTodoTable: TodoTable = response.json().obj;
                 let todoTable = new TodoTable(addedTodoTable.tableName,null,null,null,null,addedTodoTable._id);
@@ -45,8 +47,8 @@ export class TodoTableService {
             .catch(error => Observable.throw(error.json()))
     }
     removeTodoTable(todoTable: TodoTable): Observable<any> {
-
-        return this._http.delete('/api-todotables/' + todoTable._id)
+        const token = localStorage.getItem('token') ? '?token='+ localStorage.getItem('token') : '';
+        return this._http.delete('/api-todotables/' + todoTable._id+token)
             .map((response: Response) => {
                 this.todoTables.splice(this.todoTables.indexOf(todoTable), 1);
                 this.todoTablesSource.next(this.todoTables);

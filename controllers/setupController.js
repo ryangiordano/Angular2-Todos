@@ -1,6 +1,6 @@
-var User = require('../models/user');
-var TodoTable = require('../models/todo-table');
-var Todo = require('../models/todo')
+var User = require('../models/user.model');
+var TodoTable = require('../models/todo-table.model');
+var Todo = require('../models/todo.model')
 var bcrypt = require('bcryptjs')
 module.exports = function(app){
   // app.get('/api/setupSubjects')
