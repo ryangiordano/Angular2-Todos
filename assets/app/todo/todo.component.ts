@@ -33,7 +33,11 @@ export class TodoComponent implements OnInit, OnDestroy {
         //if logged in, then get the items
         this._todoTableService.getTodoTables().subscribe(
             next => {  },
-            error => {console.error(error)},
+            error => {
+              console.error(error);
+              localStorage.clear();
+              this.router.navigate(['/login'])
+            },
             () => {
                 this.todoTablesSubscription = this._todoTableService.todoTables$
                 .subscribe(

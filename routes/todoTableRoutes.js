@@ -12,7 +12,7 @@ router.use('/', function(req,res,next){
   jwt.verify(req.query.token, 'super-secret', function(err, decoded){
     if(err){
       return res.status(401).json({
-        title: "Not Authenticated initially",
+        title: "Not Authenticated initially?",
         error: err
       });
     }
