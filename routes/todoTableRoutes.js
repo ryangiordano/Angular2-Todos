@@ -57,8 +57,6 @@ router.post('/', function(req,res,next){
     dateCreated: req.body.dateCreated,
     user: req.body.user
   });
-  console.log(req.body.userId);
-  console.log(todoTable);
   todoTable.save(todoTable, function(err, result){
     if(err){
       return res.status(500).json({
@@ -88,7 +86,6 @@ router.delete('/:id', function(req,res){
       });
     }
     for(var i =0; i<todoTable.todos.length; i++){
-      console.log(todoTable.todos[i])
       Todo.findById(todoTable.todos[i], function(err, todo){
         if(!todo){
             return console.error("Error-- no todo");

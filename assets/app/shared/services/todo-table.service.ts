@@ -55,10 +55,7 @@ export class TodoTableService {
                 response.json();
             })
             .catch(error=> Observable.throw(error.json()))
-
-
     }
-    //
     registerNewUser(user: User): Observable<any> {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });

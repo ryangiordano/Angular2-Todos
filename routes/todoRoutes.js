@@ -99,9 +99,29 @@ router.patch('/', function(req, res, next){
     })
   })
 });
-router.post('/tableTodo', function(res,req,next){
-  //use the todo table's id to get the todo
-
+router.delete('/', function(req,res,next){
+  Todo.findById(req.body._id, function(err, todo){
+    console.log("from the delete method");
+    console.log(req.body);
+    if(err){
+      return res.status(500).json({
+        title: "No todo found",
+        error: {message: "No todo found here"}
+      });
+    }
+    todo.remove(function(err, result){
+      if(err){
+        res.status(500).json({
+          title: 'An error occurred',
+          error: err
+        });
+      }
+      res.status(200).json({
+        message: "Deleted successfully",
+        obj: result
+      });
+    });
+  })
 });
 
 module.exports = router;

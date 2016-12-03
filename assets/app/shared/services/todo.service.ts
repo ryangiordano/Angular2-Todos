@@ -38,25 +38,35 @@ export class TodoService {
         return this._http.post('/api-todos', body, { headers: headers })
 
             .map((response: Response) => {
-
                 let addedTodo = response.json().obj;
                 let todo = new Todo(addedTodo.title, addedTodo.todoTable, null, addedTodo.concluded, addedTodo._id);
                 this.todos.push(todo);
                 this.todosSource.next(this.todos);
-                console.log("successfully adding shit")
                 return response.json();
             })
             .catch(error => Observable.throw(error.json))
     }
+    removeTodo(todo:Todo):Observable<any>{
+            console.log(`---------------------${todo}`)
+      const token = localStorage.getItem('token') ? '?token='+ localStorage.getItem('token') : '';
+
+      return this._http.delete('/api-todo/'+todo._id +token)
+      .map((response:Response)=>{
+        let removedTodo = response.json().obj;
+        this.todos.splice(this.todos.indexOf(todo),1);
+        this.todosSource.next(this.todos);
+        response.json();
+      })
+      .catch(error=>Observable.throw(error.json()))
+    }
     updateTodo(todo: Todo): Observable<any> {
-              console.log(todo)
         const body = JSON.stringify(todo);
         const headers = new Headers({ 'Content-type': 'application/json' });
         return this._http.patch('/api-todos', body, { headers: headers })
             .map((response: Response) => {
                 return response.json();
             })
-            .catch(error => Observable.throw(error.sjon))
+            .catch(error => Observable.throw(error.json()))
     }
     //
     registerNewUser(user: User): Observable<any> {

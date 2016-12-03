@@ -49,7 +49,15 @@ export class ItemComponent implements OnInit {
         )
     }
     onRemove(todo) {
-
+      console.log("---------------onRemove")
+      this._todoService.removeTodo(todo).subscribe(
+        data=>{
+          console.log(data);
+        },
+        error=>{
+          console.error(error);
+        }
+      )
     }
 
     ngOnInit() {

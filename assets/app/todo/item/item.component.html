@@ -4,6 +4,6 @@
           <input type="checkbox" name="name" [checked]="todo.concluded" (click)="toggleConcluded(todo)">
         <span>{{todo.title}}</span>
         </div>
-
+          <span class="destroy"(click)="onRemove(todo)"></span>
     </li>
 </ul>
