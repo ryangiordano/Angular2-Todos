@@ -25,7 +25,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: 'raw'
+                loader: 'raw-loader'
             }
         ]
     },
