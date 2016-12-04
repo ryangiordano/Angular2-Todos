@@ -99,11 +99,16 @@ router.patch('/', function(req, res, next){
     })
   })
 });
-router.delete('/', function(req,res,next){
-  Todo.findById(req.body._id, function(err, todo){
-    console.log("from the delete method");
-    console.log(req.body);
+router.delete('/:id', function(req,res){
+  Todo.findById(req.params.id, function(err, todo){
+    console.log(req.params.id)
     if(err){
+      return res.status(500).json({
+        title: "No todo found",
+        error: {message: "No todo found here"}
+      });
+    }
+    if(!todo){
       return res.status(500).json({
         title: "No todo found",
         error: {message: "No todo found here"}

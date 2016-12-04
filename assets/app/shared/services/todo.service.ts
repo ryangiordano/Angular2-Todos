@@ -47,17 +47,16 @@ export class TodoService {
             .catch(error => Observable.throw(error.json))
     }
     removeTodo(todo:Todo):Observable<any>{
-            console.log(`---------------------${todo}`)
       const token = localStorage.getItem('token') ? '?token='+ localStorage.getItem('token') : '';
 
-      return this._http.delete('/api-todo/'+todo._id +token)
+      return this._http.delete('/api-todos/'+todo._id +token)
       .map((response:Response)=>{
         let removedTodo = response.json().obj;
         this.todos.splice(this.todos.indexOf(todo),1);
         this.todosSource.next(this.todos);
         response.json();
       })
-      .catch(error=>Observable.throw(error.json()))
+      .catch(error=>Observable.throw(error.json))
     }
     updateTodo(todo: Todo): Observable<any> {
         const body = JSON.stringify(todo);
@@ -74,7 +73,7 @@ export class TodoService {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         return this._http.post('/users-api', body, { headers: headers })
             .map((response: Response) => response.json())
-            .catch(error => Observable.throw(error.json()))
+            .catch(error => Observable.throw(error.json))
     }
     isLoggedIn() {
         return localStorage.getItem('token') !== null;

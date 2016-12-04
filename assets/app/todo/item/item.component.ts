@@ -20,13 +20,12 @@ import { TodoService} from '../../shared/services/todo.service';
           animate(300)
         ]),
         transition('*=>void', [
-          style({
+          animate(300, style({
             opacity:0
-          }),
-          animate(300)
+            // transform: 'translateX(100px)'
+          }))
         ])
       ]),
-
     ]
 })
 
@@ -49,7 +48,6 @@ export class ItemComponent implements OnInit {
         )
     }
     onRemove(todo) {
-      console.log("---------------onRemove")
       this._todoService.removeTodo(todo).subscribe(
         data=>{
           console.log(data);
